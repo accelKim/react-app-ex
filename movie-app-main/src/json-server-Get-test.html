@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    데이터 가져오기
+    <script>
+        function getData() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:3000/posts');
+            xhr.setRequestHeader('content-type', 'application/json');
+            xhr.send();
+            xhr.onload = () => { // 서버로부터 응답이 완료 되면
+                if(xhr.status === 200) {
+                    const res = JSON.parse(xhr.response);
+                    res.forEach(element => {
+                        console.log(element);    
+                    });  
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            }
+        }
+        getData();
+    </script>
+</body>
+</html>

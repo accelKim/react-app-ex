@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="postData()">입력</button>
+    <script>
+        function postData() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('PUT', 'http://localhost:3000/posts');
+            xhr.setRequestHeader('content-type', 'application/json; charset=UTF-8');
+            const data = { title : "javascript", author : 'typicode'};
+            xhr.send(JSON.stringify(data));
+            xhr.onload = () => { // 서버로부터 응답이 완료 되면
+                if(xhr.status === 201) {
+                    const res = JSON.parse(xhr.response);
+                    console.log(res);    
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
